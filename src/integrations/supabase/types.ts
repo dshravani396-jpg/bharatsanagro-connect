@@ -14,16 +14,311 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bookings: {
+        Row: {
+          booking_code: string
+          created_at: string
+          farmer_id: string
+          farmer_mobile: string
+          farmer_name: string
+          id: string
+          product_id: string
+          product_name: string
+          quantity: number
+          status: Database["public"]["Enums"]["booking_status"]
+          store_id: string
+          total_price: number
+          updated_at: string
+        }
+        Insert: {
+          booking_code?: string
+          created_at?: string
+          farmer_id: string
+          farmer_mobile?: string
+          farmer_name?: string
+          id?: string
+          product_id: string
+          product_name?: string
+          quantity?: number
+          status?: Database["public"]["Enums"]["booking_status"]
+          store_id: string
+          total_price?: number
+          updated_at?: string
+        }
+        Update: {
+          booking_code?: string
+          created_at?: string
+          farmer_id?: string
+          farmer_mobile?: string
+          farmer_name?: string
+          id?: string
+          product_id?: string
+          product_name?: string
+          quantity?: number
+          status?: Database["public"]["Enums"]["booking_status"]
+          store_id?: string
+          total_price?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookings_store_id_fkey"
+            columns: ["store_id"]
+            isOneToOne: false
+            referencedRelation: "stores"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      products: {
+        Row: {
+          brand: string | null
+          category: string
+          created_at: string
+          description: string | null
+          expiry_date: string | null
+          id: string
+          image_url: string | null
+          is_available: boolean
+          mfg_date: string | null
+          name: string
+          price: number
+          quantity: number
+          store_id: string
+          unit: string | null
+          updated_at: string
+        }
+        Insert: {
+          brand?: string | null
+          category: string
+          created_at?: string
+          description?: string | null
+          expiry_date?: string | null
+          id?: string
+          image_url?: string | null
+          is_available?: boolean
+          mfg_date?: string | null
+          name: string
+          price?: number
+          quantity?: number
+          store_id: string
+          unit?: string | null
+          updated_at?: string
+        }
+        Update: {
+          brand?: string | null
+          category?: string
+          created_at?: string
+          description?: string | null
+          expiry_date?: string | null
+          id?: string
+          image_url?: string | null
+          is_available?: boolean
+          mfg_date?: string | null
+          name?: string
+          price?: number
+          quantity?: number
+          store_id?: string
+          unit?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "products_store_id_fkey"
+            columns: ["store_id"]
+            isOneToOne: false
+            referencedRelation: "stores"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          district: string | null
+          email: string | null
+          full_name: string
+          id: string
+          language: string
+          mobile: string
+          photo_url: string | null
+          state: string | null
+          updated_at: string
+          village: string | null
+        }
+        Insert: {
+          created_at?: string
+          district?: string | null
+          email?: string | null
+          full_name?: string
+          id: string
+          language?: string
+          mobile?: string
+          photo_url?: string | null
+          state?: string | null
+          updated_at?: string
+          village?: string | null
+        }
+        Update: {
+          created_at?: string
+          district?: string | null
+          email?: string | null
+          full_name?: string
+          id?: string
+          language?: string
+          mobile?: string
+          photo_url?: string | null
+          state?: string | null
+          updated_at?: string
+          village?: string | null
+        }
+        Relationships: []
+      }
+      reviews: {
+        Row: {
+          author_name: string
+          category: string
+          comment: string | null
+          created_at: string
+          id: string
+          rating: number
+          user_id: string
+        }
+        Insert: {
+          author_name?: string
+          category?: string
+          comment?: string | null
+          created_at?: string
+          id?: string
+          rating?: number
+          user_id: string
+        }
+        Update: {
+          author_name?: string
+          category?: string
+          comment?: string | null
+          created_at?: string
+          id?: string
+          rating?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
+      stores: {
+        Row: {
+          address: string | null
+          created_at: string
+          description: string | null
+          district: string | null
+          email: string | null
+          gst_number: string | null
+          id: string
+          image_url: string | null
+          is_open: boolean
+          license_details: string | null
+          mobile: string
+          opening_hours: string | null
+          owner_id: string | null
+          owner_name: string
+          pincode: string | null
+          rating: number
+          state: string | null
+          store_name: string
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          created_at?: string
+          description?: string | null
+          district?: string | null
+          email?: string | null
+          gst_number?: string | null
+          id?: string
+          image_url?: string | null
+          is_open?: boolean
+          license_details?: string | null
+          mobile?: string
+          opening_hours?: string | null
+          owner_id?: string | null
+          owner_name?: string
+          pincode?: string | null
+          rating?: number
+          state?: string | null
+          store_name: string
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          created_at?: string
+          description?: string | null
+          district?: string | null
+          email?: string | null
+          gst_number?: string | null
+          id?: string
+          image_url?: string | null
+          is_open?: boolean
+          license_details?: string | null
+          mobile?: string
+          opening_hours?: string | null
+          owner_id?: string | null
+          owner_name?: string
+          pincode?: string | null
+          rating?: number
+          state?: string | null
+          store_name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "farmer" | "store"
+      booking_status:
+        | "pending"
+        | "confirmed"
+        | "ready"
+        | "collected"
+        | "cancelled"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +445,15 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["farmer", "store"],
+      booking_status: [
+        "pending",
+        "confirmed",
+        "ready",
+        "collected",
+        "cancelled",
+      ],
+    },
   },
 } as const
