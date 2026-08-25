@@ -19,7 +19,7 @@ export function PageHeading({
   action,
 }: {
   title: string;
-  subtitle?: string;
+  subtitle?: string | undefined;
   action?: ReactNode;
 }) {
   return (

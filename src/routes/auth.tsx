@@ -53,7 +53,7 @@ function AuthPage() {
   const navigate = useNavigate();
   const { refresh } = useAuth();
 
-  const [mode, setMode] = useState<"login" | "register">(tab);
+  const [mode, setMode] = useState<"login" | "register">(tab ?? "login");
   const [showPassword, setShowPassword] = useState(false);
   const [busy, setBusy] = useState(false);
 
