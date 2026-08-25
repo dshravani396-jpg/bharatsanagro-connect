@@ -68,19 +68,41 @@ export function formatDate(value?: string | null) {
   });
 }
 
+/** Turn free text into a dictionary-key fragment: "Urea 46% Nitrogen" -> "urea_46_nitrogen". */
+export function contentSlug(value: string) {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+}
+
 /**
- * Translate a product unit ("kg", "bag", ...) using the active language.
+ * Translate a value that lives in the database rather than in the code.
+ *
+ * Product names, store names and states are stored once, in whatever language
+ * they were entered, so they cannot be translated by the language switcher on
+ * their own. This looks up an optional override keyed on the stored text.
  *
  * t() returns the key itself when a translation is missing, never undefined,
- * so compare the result against the key to detect that case. Units are typed
- * freely by store owners, so unknown values are expected: fall back to what
- * they typed rather than printing a raw key like "unit.quintal" on screen.
+ * so compare the result against the key to detect that case and fall back to
+ * the stored value. Untranslated content is the normal case, not an error:
+ * store owners type freely, and English is a reasonable fallback.
  */
-export function unitLabel(t: (key: string) => string, unit?: string | null) {
-  if (!unit) return "";
-  const key = `unit.${unit.trim().toLowerCase()}`;
+export function translatedContent(
+  t: (key: string) => string,
+  prefix: string,
+  value?: string | null,
+) {
+  if (!value) return "";
+  const key = `${prefix}.${contentSlug(value)}`;
   const label = t(key);
-  return label === key ? unit : label;
+  return label === key ? value : label;
+}
+
+/** Translate a product unit ("kg", "bag", ...) using the active language. */
+export function unitLabel(t: (key: string) => string, unit?: string | null) {
+  return translatedContent(t, "unit", unit);
 }
 
 export function generateOtp() {

@@ -8,6 +8,7 @@ import { PageShell } from "@/components/PageShell";
 import { ProductCard } from "@/components/ProductCard";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { translatedContent } from "@/lib/catalog";
 import { useStore, useStoreProducts, type ProductWithStore } from "@/lib/data";
 import { useI18n } from "@/lib/i18n";
 
@@ -80,7 +81,7 @@ function StoreDetail() {
           />
           <div className="space-y-3 p-5">
             <div className="flex flex-wrap items-center gap-3">
-              <h1 className="text-2xl font-semibold text-primary-deep">{store.store_name}</h1>
+              <h1 className="text-2xl font-semibold text-primary-deep">{translatedContent(t, "storename", store.store_name)}</h1>
               <Badge
                 variant="outline"
                 className={
@@ -103,7 +104,7 @@ function StoreDetail() {
               </p>
               <p className="flex items-start gap-1.5">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
-                {store.address}, {store.district}, {store.state} {store.pincode}
+                {store.address}, {store.district}, {translatedContent(t, "state", store.state)} {store.pincode}
               </p>
               <p className="flex items-center gap-1.5">
                 <Phone className="h-4 w-4" />
