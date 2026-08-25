@@ -6,7 +6,7 @@ import { RequireRole } from "@/components/RequireRole";
 import { StatusBadge } from "@/components/StatusBadge";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/lib/auth";
-import { formatDate, formatPrice } from "@/lib/catalog";
+import { formatDate, formatPrice, translatedContent } from "@/lib/catalog";
 import { useStoreBookings, useStoreProducts } from "@/lib/data";
 import { useI18n } from "@/lib/i18n";
 
@@ -59,7 +59,7 @@ function StoreDashboard() {
     <PageShell>
       <div className="container-page space-y-8 py-10">
         <PageHeading
-          title={`${t("store.welcome")}${store?.store_name ? `, ${store.store_name}` : ""}`}
+          title={`${t("store.welcome")}${store?.store_name ? `, ${translatedContent(t, "storename", store.store_name)}` : ""}`}
           subtitle={t("store.welcomeSub")}
           action={
             <Button asChild>

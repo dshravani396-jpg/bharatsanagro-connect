@@ -8,7 +8,7 @@ import { StatusBadge } from "@/components/StatusBadge";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
-import { formatDate, formatPrice } from "@/lib/catalog";
+import { formatDate, formatPrice, translatedContent } from "@/lib/catalog";
 import { useMyBookings } from "@/lib/data";
 import { useI18n } from "@/lib/i18n";
 
@@ -88,9 +88,9 @@ function MyBookings() {
 
                 {b.stores ? (
                   <div className="rounded-xl bg-muted/60 p-3 text-sm">
-                    <p className="font-medium">{b.stores.store_name}</p>
+                    <p className="font-medium">{translatedContent(t, "storename", b.stores.store_name)}</p>
                     <p className="text-xs text-muted-foreground">
-                      {b.stores.address}, {b.stores.district}, {b.stores.state} ·{" "}
+                      {translatedContent(t, "address", b.stores.address)}, {translatedContent(t, "district", b.stores.district)}, {translatedContent(t, "state", b.stores.state)} ·{" "}
                       {b.stores.mobile}
                     </p>
                   </div>

@@ -147,7 +147,7 @@ function ProductDetail() {
               <p className="mt-2 text-sm font-medium">{translatedContent(t, "storename", product.stores?.store_name)}</p>
               <p className="mt-1 flex items-start gap-1.5 text-sm text-muted-foreground">
                 <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0" />
-                {product.stores?.address}, {product.stores?.district}, {translatedContent(t, "state", product.stores?.state)}{" "}
+                {translatedContent(t, "address", product.stores?.address)}, {translatedContent(t, "district", product.stores?.district)}, {translatedContent(t, "state", product.stores?.state)}{" "}
                 {product.stores?.pincode}
               </p>
               {product.stores ? (

@@ -643,6 +643,15 @@ const mr: Dict = {
   "storename.shree_krishna_agro_center": "श्री कृष्ण अ‍ॅग्रो सेंटर",
   "storename.jai_kisan_krushi_seva_kendra": "जय किसान कृषी सेवा केंद्र",
   "storename.bharat_agri_mart": "भारत अ‍ॅग्री मार्ट",
+  "district.pune": "पुणे",
+  "district.nashik": "नाशिक",
+  "district.indore": "इंदूर",
+  "address.main_market_road_baramati": "मेन मार्केट रोड, बारामती",
+  "address.near_bus_stand_niphad": "बस स्थानकाजवळ, निफाड",
+  "address.krishi_mandi_road_sanwer": "कृषी मंडी रोड, सांवेर",
+  "hours.8_00_am_8_00_pm": "सकाळी ८:०० - रात्री ८:००",
+  "hours.9_00_am_7_00_pm": "सकाळी ९:०० - संध्याकाळी ७:००",
+  "hours.8_30_am_7_30_pm": "सकाळी ८:३० - संध्याकाळी ७:३०",
 };
 
 const hi: Dict = {
@@ -971,6 +980,15 @@ const hi: Dict = {
   "storename.shree_krishna_agro_center": "श्री कृष्ण एग्रो सेंटर",
   "storename.jai_kisan_krushi_seva_kendra": "जय किसान कृषि सेवा केंद्र",
   "storename.bharat_agri_mart": "भारत एग्री मार्ट",
+  "district.pune": "पुणे",
+  "district.nashik": "नासिक",
+  "district.indore": "इंदौर",
+  "address.main_market_road_baramati": "मेन मार्केट रोड, बारामती",
+  "address.near_bus_stand_niphad": "बस स्टैंड के पास, निफाड",
+  "address.krishi_mandi_road_sanwer": "कृषि मंडी रोड, सांवेर",
+  "hours.8_00_am_8_00_pm": "सुबह ८:०० - रात ८:००",
+  "hours.9_00_am_7_00_pm": "सुबह ९:०० - शाम ७:००",
+  "hours.8_30_am_7_30_pm": "सुबह ८:३० - शाम ७:३०",
 };
 
 const DICTS: Record<Lang, Dict> = { en, mr: { ...en, ...mr }, hi: { ...en, ...hi } };
