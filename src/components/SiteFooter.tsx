@@ -10,7 +10,6 @@ const LINKS = [
   { to: "/stores", labelKey: "nav.stores" },
   { to: "/how-it-works", labelKey: "nav.howItWorks" },
   { to: "/about", labelKey: "nav.about" },
-  { to: "/contact", labelKey: "nav.contact" },
   { to: "/privacy", labelKey: "privacy.title" },
   { to: "/terms", labelKey: "terms.title" },
 ];
