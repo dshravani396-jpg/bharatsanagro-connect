@@ -4,7 +4,7 @@ import { MapPin, Star, Store as StoreIcon } from "lucide-react";
 import productPlaceholder from "@/assets/product-placeholder.jpg";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { formatPrice, unitLabel } from "@/lib/catalog";
+import { formatPrice, translatedContent, unitLabel } from "@/lib/catalog";
 import type { ProductWithStore } from "@/lib/data";
 import { useI18n } from "@/lib/i18n";
 
@@ -33,7 +33,7 @@ export function ProductCard({
       <div className="flex flex-1 flex-col gap-3 p-4">
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0">
-            <h3 className="truncate text-base font-semibold text-primary-deep">{product.name}</h3>
+            <h3 className="truncate text-base font-semibold text-primary-deep">{translatedContent(t, "prod", product.name)}</h3>
             <p className="truncate text-xs text-muted-foreground">
               {product.brand || "—"} · {t(`cat.${product.category}`)}
             </p>
@@ -60,12 +60,12 @@ export function ProductCard({
         <div className="space-y-1 rounded-xl bg-muted/60 p-3 text-xs text-muted-foreground">
           <p className="flex min-w-0 items-center gap-1.5 font-medium text-foreground">
             <StoreIcon className="h-3.5 w-3.5 shrink-0 text-primary" />
-            <span className="truncate">{product.stores?.store_name}</span>
+            <span className="truncate">{translatedContent(t, "storename", product.stores?.store_name)}</span>
           </p>
           <p className="flex min-w-0 items-center gap-1.5">
             <MapPin className="h-3.5 w-3.5 shrink-0" />
             <span className="truncate">
-              {product.stores?.district}, {product.stores?.state}
+              {product.stores?.district}, {translatedContent(t, "state", product.stores?.state)}
             </span>
           </p>
           <p className="flex items-center gap-1.5">
