@@ -22,9 +22,13 @@ import { STATES, generateOtp } from "@/lib/catalog";
 import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/auth")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    tab: search.tab === "register" ? ("register" as const) : ("login" as const),
-  }),
+  validateSearch: (search: Record<string, unknown>) => {
+    const out: { tab?: "login" | "register" } = {};
+    if (search["tab"] === "register") out.tab = "register";
+    else if (search["tab"] === "login") out.tab = "login";
+    return out;
+  },
+
   head: () => ({
     meta: [
       { title: "Login or Register — Bharatsanagro" },
