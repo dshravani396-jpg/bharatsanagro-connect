@@ -315,6 +315,13 @@ const en: Dict = {
   "unit.packet": "packet",
   "unit.unit": "unit",
   "common.unit": "Unit",
+  "auth.aadhaar": "Aadhaar Number",
+  "auth.aadhaarPlaceholder": "12-digit Aadhaar number",
+  "auth.invalidAadhaar": "Enter a valid 12-digit Aadhaar number",
+  "auth.generateOtp": "Generate OTP",
+  "auth.otpBlockDesc": "Enter the 4-digit code sent to your mobile number.",
+  "auth.otpNotConfigured": "OTP sign-in is not enabled yet. Please contact the administrator.",
+  "auth.changeDetails": "Change details",
 };
 
 const mr: Dict = {
@@ -652,6 +659,13 @@ const mr: Dict = {
   "hours.8_00_am_8_00_pm": "सकाळी ८:०० - रात्री ८:००",
   "hours.9_00_am_7_00_pm": "सकाळी ९:०० - संध्याकाळी ७:००",
   "hours.8_30_am_7_30_pm": "सकाळी ८:३० - संध्याकाळी ७:३०",
+  "auth.aadhaar": "आधार क्रमांक",
+  "auth.aadhaarPlaceholder": "१२ अंकी आधार क्रमांक",
+  "auth.invalidAadhaar": "वैध १२ अंकी आधार क्रमांक टाका",
+  "auth.generateOtp": "ओटीपी तयार करा",
+  "auth.otpBlockDesc": "तुमच्या मोबाईल क्रमांकावर पाठवलेला ४ अंकी कोड टाका.",
+  "auth.otpNotConfigured": "ओटीपी लॉगिन अद्याप सुरू नाही. कृपया प्रशासकाशी संपर्क साधा.",
+  "auth.changeDetails": "तपशील बदला",
 };
 
 const hi: Dict = {
@@ -989,6 +1003,13 @@ const hi: Dict = {
   "hours.8_00_am_8_00_pm": "सुबह ८:०० - रात ८:००",
   "hours.9_00_am_7_00_pm": "सुबह ९:०० - शाम ७:००",
   "hours.8_30_am_7_30_pm": "सुबह ८:३० - शाम ७:३०",
+  "auth.aadhaar": "आधार संख्या",
+  "auth.aadhaarPlaceholder": "१२ अंकों का आधार नंबर",
+  "auth.invalidAadhaar": "वैध १२ अंकों का आधार नंबर दर्ज करें",
+  "auth.generateOtp": "ओटीपी बनाएं",
+  "auth.otpBlockDesc": "आपके मोबाइल नंबर पर भेजा गया ४ अंकों का कोड दर्ज करें।",
+  "auth.otpNotConfigured": "ओटीपी लॉगिन अभी सक्रिय नहीं है। कृपया प्रशासक से संपर्क करें।",
+  "auth.changeDetails": "विवरण बदलें",
 };
 
 const DICTS: Record<Lang, Dict> = { en, mr: { ...en, ...mr }, hi: { ...en, ...hi } };

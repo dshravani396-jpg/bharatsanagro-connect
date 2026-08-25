@@ -1,5 +1,4 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -7,14 +6,17 @@ import authHero from "@/assets/auth-hero.jpg";
 import { BrandLogo } from "@/components/BrandLogo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { Label } from "@/components/ui/label";
-import { supabase } from "@/integrations/supabase/client";
-import { isValidMobile, mobileToEmail, useAuth } from "@/lib/auth";
+import { isValidAadhaar, isValidMobile, useAuth } from "@/lib/auth";
+import { generateOtp } from "@/lib/catalog";
 import { useI18n } from "@/lib/i18n";
 
+const OTP_LENGTH = 4;
+
 export const Route = createFileRoute("/auth")({
-  // `tab` is still accepted so any old bookmark or link keeps resolving,
-  // but self-registration has been removed and the value is ignored.
+  // `tab` is still accepted so any old bookmark keeps resolving, but
+  // self-registration has been removed and the value is ignored.
   validateSearch: (search: Record<string, unknown>) => {
     const out: { tab?: "login" | "register" } = {};
     if (search["tab"] === "register") out.tab = "register";
@@ -27,7 +29,7 @@ export const Route = createFileRoute("/auth")({
       { title: "Login — Bharatsanagro" },
       {
         name: "description",
-        content: "Sign in to Bharatsanagro with your mobile number and password.",
+        content: "Sign in to Bharatsanagro with your mobile number, Aadhaar number and OTP.",
       },
       { property: "og:title", content: "Login — Bharatsanagro" },
       {
@@ -44,27 +46,64 @@ function AuthPage() {
   const navigate = useNavigate();
   const { refresh } = useAuth();
 
-  const [showPassword, setShowPassword] = useState(false);
+  const [mobile, setMobile] = useState("");
+  const [aadhaar, setAadhaar] = useState("");
+  const [otp, setOtp] = useState("");
+  const [expectedOtp, setExpectedOtp] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
-  const [loginMobile, setLoginMobile] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
 
-  async function handleLogin(e: React.FormEvent) {
+  function issueOtp() {
+    // TODO: replace with a server-issued code. Supabase does this via
+    // supabase.auth.signInWithOtp({ phone }), which needs an SMS provider
+    // configured in the Supabase dashboard. Until then the code is generated
+    // here and shown on screen so the screen can be exercised - which is why
+    // completeSignIn() below deliberately refuses to sign anyone in.
+    const code = generateOtp().slice(0, OTP_LENGTH);
+    setExpectedOtp(code);
+    setOtp("");
+    toast.success(`${t("auth.otpSent")} · ${code}`);
+  }
+
+  function handleGenerateOtp(e: React.FormEvent) {
     e.preventDefault();
-    if (!isValidMobile(loginMobile)) {
+    if (!isValidMobile(mobile)) {
       toast.error(t("auth.invalidMobile"));
       return;
     }
-    setBusy(true);
-    const { error } = await supabase.auth.signInWithPassword({
-      email: mobileToEmail(loginMobile),
-      password: loginPassword,
-    });
-    setBusy(false);
-    if (error) {
-      toast.error(t("auth.loginFailed"));
+    if (!isValidAadhaar(aadhaar)) {
+      toast.error(t("auth.invalidAadhaar"));
       return;
     }
+    issueOtp();
+  }
+
+  /**
+   * The single place real authentication has to be wired in.
+   *
+   * The password field was removed, so there is no credential left for
+   * supabase.auth.signInWithPassword(). Completing this needs either
+   * Supabase phone OTP (signInWithOtp / verifyOtp with an SMS provider) or a
+   * server endpoint that checks the code and issues a session.
+   *
+   * It refuses rather than guessing, because a code generated in the browser
+   * proves nothing: accepting it would let anyone sign in as anyone.
+   */
+  async function completeSignIn() {
+    setBusy(true);
+    await Promise.resolve();
+    setBusy(false);
+    toast.error(t("auth.otpNotConfigured"));
+    return false;
+  }
+
+  async function handleVerify(e: React.FormEvent) {
+    e.preventDefault();
+    if (otp.length !== OTP_LENGTH || otp !== expectedOtp) {
+      toast.error(t("auth.invalidOtp"));
+      return;
+    }
+    const signedIn = await completeSignIn();
+    if (!signedIn) return;
     await refresh();
     toast.success(t("auth.welcomeBack"));
     void navigate({ to: "/" });
@@ -94,42 +133,90 @@ function AuthPage() {
           <div className="mt-8">
             <h1 className="text-xl font-semibold text-primary-deep">{t("auth.login")}</h1>
             <p className="mt-1 text-sm text-muted-foreground">{t("auth.loginSubtitle")}</p>
-            <form onSubmit={handleLogin} className="mt-5 space-y-4">
+
+            <form onSubmit={handleGenerateOtp} className="mt-5 space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="login-mobile">{t("common.mobile")}</Label>
                 <Input
                   id="login-mobile"
                   inputMode="numeric"
+                  autoComplete="tel"
+                  maxLength={10}
                   placeholder={t("auth.mobilePlaceholder")}
-                  value={loginMobile}
-                  onChange={(e) => setLoginMobile(e.target.value)}
+                  value={mobile}
+                  onChange={(e) => setMobile(e.target.value.replace(/\D/g, ""))}
+                  disabled={Boolean(expectedOtp)}
                 />
               </div>
+
               <div className="space-y-2">
-                <Label htmlFor="login-password">{t("common.password")}</Label>
-                <div className="relative">
-                  <Input
-                    id="login-password"
-                    type={showPassword ? "text" : "password"}
-                    placeholder={t("auth.passwordPlaceholder")}
-                    value={loginPassword}
-                    onChange={(e) => setLoginPassword(e.target.value)}
-                  />
-                  <button
-                    type="button"
-                    aria-label={showPassword ? t("auth.hidePassword") : t("auth.showPassword")}
-                    onClick={() => setShowPassword((v) => !v)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
-                  >
-                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                  </button>
-                </div>
+                <Label htmlFor="login-aadhaar">{t("auth.aadhaar")}</Label>
+                <Input
+                  id="login-aadhaar"
+                  inputMode="numeric"
+                  maxLength={12}
+                  placeholder={t("auth.aadhaarPlaceholder")}
+                  value={aadhaar}
+                  onChange={(e) => setAadhaar(e.target.value.replace(/\D/g, ""))}
+                  disabled={Boolean(expectedOtp)}
+                />
               </div>
-              <Button type="submit" className="w-full" disabled={busy}>
-                {busy ? t("common.loading") : t("auth.login")}
-              </Button>
-              <p className="text-xs text-muted-foreground">{t("auth.forgotHelp")}</p>
+
+              {expectedOtp ? null : (
+                <Button type="submit" className="w-full">
+                  {t("auth.generateOtp")}
+                </Button>
+              )}
             </form>
+
+            {expectedOtp ? (
+              <form onSubmit={handleVerify} className="mt-6 space-y-4 border-t pt-6">
+                <div className="space-y-2">
+                  <Label htmlFor="login-otp">{t("auth.otpTitle")}</Label>
+                  <p className="text-sm text-muted-foreground">{t("auth.otpBlockDesc")}</p>
+                  <InputOTP
+                    id="login-otp"
+                    maxLength={OTP_LENGTH}
+                    value={otp}
+                    onChange={setOtp}
+                    containerClassName="justify-center pt-1"
+                  >
+                    <InputOTPGroup className="gap-2">
+                      {Array.from({ length: OTP_LENGTH }, (_, i) => (
+                        <InputOTPSlot
+                          key={i}
+                          index={i}
+                          className="h-12 w-12 rounded-md border text-lg font-semibold"
+                        />
+                      ))}
+                    </InputOTPGroup>
+                  </InputOTP>
+                </div>
+
+                <Button type="submit" className="w-full" disabled={busy || otp.length !== OTP_LENGTH}>
+                  {busy ? t("common.saving") : t("auth.verify")}
+                </Button>
+
+                <div className="flex items-center justify-between gap-2">
+                  <Button type="button" variant="ghost" size="sm" onClick={issueOtp}>
+                    {t("auth.resend")}
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => {
+                      setExpectedOtp(null);
+                      setOtp("");
+                    }}
+                  >
+                    {t("auth.changeDetails")}
+                  </Button>
+                </div>
+              </form>
+            ) : null}
+
+            <p className="mt-4 text-xs text-muted-foreground">{t("auth.forgotHelp")}</p>
           </div>
         </div>
       </div>
