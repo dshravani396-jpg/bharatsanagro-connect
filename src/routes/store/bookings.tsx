@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
-import { BOOKING_STATUSES, formatDate, formatPrice, type BookingStatus } from "@/lib/catalog";
+import { BOOKING_STATUSES, formatDate, formatPrice, translatedContent, type BookingStatus } from "@/lib/catalog";
 import { useStoreBookings } from "@/lib/data";
 import { useI18n } from "@/lib/i18n";
 
@@ -67,7 +67,7 @@ function StoreBookings() {
       <div className="container-page space-y-6 py-10">
         <PageHeading
           title={t("store.farmerBookings")}
-          subtitle={store?.store_name ?? ""}
+          subtitle={translatedContent(t, "storename", store?.store_name)}
           action={
             <Select value={filter} onValueChange={setFilter}>
               <SelectTrigger className="w-44" aria-label={t("common.status")}>

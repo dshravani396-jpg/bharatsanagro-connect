@@ -28,7 +28,7 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
-import { CATEGORIES, formatPrice, unitLabel } from "@/lib/catalog";
+import { CATEGORIES, formatPrice, translatedContent, unitLabel } from "@/lib/catalog";
 import { useStoreProducts, type Product } from "@/lib/data";
 import { useI18n } from "@/lib/i18n";
 
@@ -168,7 +168,7 @@ function StoreProducts() {
       <div className="container-page space-y-6 py-10">
         <PageHeading
           title={t("store.myProducts")}
-          subtitle={store?.store_name ?? ""}
+          subtitle={translatedContent(t, "storename", store?.store_name)}
           action={
             <Button onClick={() => setDraft({ ...EMPTY })}>
               <Plus className="mr-2 h-4 w-4" />

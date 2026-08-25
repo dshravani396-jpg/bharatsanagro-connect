@@ -74,7 +74,7 @@ function StoreDetail() {
         <div className="surface-card overflow-hidden">
           <img
             src={store.image_url || storePlaceholder}
-            alt={store.store_name}
+            alt={translatedContent(t, "storename", store.store_name)}
             width={1600}
             height={600}
             className="h-48 w-full object-cover sm:h-64"
@@ -100,11 +100,11 @@ function StoreDetail() {
               </p>
               <p className="flex items-center gap-1.5">
                 <Clock className="h-4 w-4" />
-                {t("stores.openingHours")}: {store.opening_hours}
+                {t("stores.openingHours")}: {translatedContent(t, "hours", store.opening_hours)}
               </p>
               <p className="flex items-start gap-1.5">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
-                {store.address}, {store.district}, {translatedContent(t, "state", store.state)} {store.pincode}
+                {translatedContent(t, "address", store.address)}, {translatedContent(t, "district", store.district)}, {translatedContent(t, "state", store.state)} {store.pincode}
               </p>
               <p className="flex items-center gap-1.5">
                 <Phone className="h-4 w-4" />

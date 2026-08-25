@@ -24,7 +24,7 @@ export function StoreCard({
       <Link to="/stores/$storeId" params={{ storeId: store.id }}>
         <img
           src={store.image_url || storePlaceholder}
-          alt={store.store_name}
+          alt={translatedContent(t, "storename", store.store_name)}
           loading="lazy"
           width={1200}
           height={800}
@@ -56,12 +56,12 @@ export function StoreCard({
           <p className="flex items-start gap-1.5">
             <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0" />
             <span className="line-clamp-2">
-              {store.address}, {store.district}, {translatedContent(t, "state", store.state)} {store.pincode}
+              {translatedContent(t, "address", store.address)}, {translatedContent(t, "district", store.district)}, {translatedContent(t, "state", store.state)} {store.pincode}
             </span>
           </p>
           <p className="flex items-center gap-1.5">
             <Clock className="h-3.5 w-3.5 shrink-0" />
-            {store.opening_hours}
+            {translatedContent(t, "hours", store.opening_hours)}
           </p>
           <p className="flex items-center gap-1.5">
             <Package className="h-3.5 w-3.5 shrink-0" />

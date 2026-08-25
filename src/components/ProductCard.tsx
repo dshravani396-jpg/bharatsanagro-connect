@@ -65,7 +65,7 @@ export function ProductCard({
           <p className="flex min-w-0 items-center gap-1.5">
             <MapPin className="h-3.5 w-3.5 shrink-0" />
             <span className="truncate">
-              {product.stores?.district}, {translatedContent(t, "state", product.stores?.state)}
+              {translatedContent(t, "district", product.stores?.district)}, {translatedContent(t, "state", product.stores?.state)}
             </span>
           </p>
           <p className="flex items-center gap-1.5">
