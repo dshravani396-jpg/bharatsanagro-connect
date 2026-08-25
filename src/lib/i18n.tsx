@@ -308,6 +308,13 @@ const en: Dict = {
     "By using Bharatsanagro you agree that bookings made on this website are requests to reserve products at the selected Agro Store. Payment and product handover take place offline at the store. Product information, pricing and availability are provided by Agro Store owners, who are responsible for their accuracy. Bharatsanagro does not provide delivery or shipping services.",
   "footer.rights": "© 2026 Bharatsanagro. All rights reserved.",
   "footer.tagline": "Connecting farmers and Agro Stores across India.",
+  "unit.kg": "kg",
+  "unit.bag": "bag",
+  "unit.roll": "roll",
+  "unit.litre": "litre",
+  "unit.packet": "packet",
+  "unit.unit": "unit",
+  "common.unit": "Unit",
 };
 
 const mr: Dict = {
@@ -595,6 +602,13 @@ const mr: Dict = {
     "या वेबसाइटवरील बुकिंग म्हणजे निवडलेल्या कृषी दुकानात उत्पादन राखून ठेवण्याची विनंती आहे. पैसे व उत्पादनाची देवाणघेवाण दुकानात ऑफलाइन होते. उत्पादन माहिती, किंमत व उपलब्धता दुकानदारांकडून दिली जाते. भारतसनऍग्रो डिलिव्हरी सेवा देत नाही.",
   "footer.rights": "© 2026 भारतसनऍग्रो. सर्व हक्क राखीव.",
   "footer.tagline": "संपूर्ण भारतातील शेतकरी आणि कृषी दुकानांना जोडणारे व्यासपीठ.",
+  "unit.kg": "किलो",
+  "unit.bag": "पोती",
+  "unit.roll": "रोल",
+  "unit.litre": "लिटर",
+  "unit.packet": "पाकीट",
+  "unit.unit": "नग",
+  "common.unit": "एकक",
 };
 
 const hi: Dict = {
@@ -882,6 +896,13 @@ const hi: Dict = {
     "इस वेबसाइट पर की गई बुकिंग चुने हुए एग्रो स्टोर पर उत्पाद आरक्षित करने का अनुरोध है। भुगतान और उत्पाद हस्तांतरण स्टोर पर ऑफलाइन होता है। उत्पाद जानकारी, कीमत और उपलब्धता स्टोर मालिकों द्वारा दी जाती है। भारतसनएग्रो डिलीवरी सेवा प्रदान नहीं करता।",
   "footer.rights": "© 2026 भारतसनएग्रो. सर्वाधिकार सुरक्षित।",
   "footer.tagline": "पूरे भारत में किसानों और एग्रो स्टोर को जोड़ता मंच।",
+  "unit.kg": "किग्रा",
+  "unit.bag": "बोरी",
+  "unit.roll": "रोल",
+  "unit.litre": "लीटर",
+  "unit.packet": "पैकेट",
+  "unit.unit": "नग",
+  "common.unit": "इकाई",
 };
 
 const DICTS: Record<Lang, Dict> = { en, mr: { ...en, ...mr }, hi: { ...en, ...hi } };

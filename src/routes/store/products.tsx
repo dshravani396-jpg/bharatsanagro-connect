@@ -28,7 +28,7 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
-import { CATEGORIES, formatPrice } from "@/lib/catalog";
+import { CATEGORIES, formatPrice, unitLabel } from "@/lib/catalog";
 import { useStoreProducts, type Product } from "@/lib/data";
 import { useI18n } from "@/lib/i18n";
 
@@ -186,7 +186,7 @@ function StoreProducts() {
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-semibold text-primary-deep">{p.name}</p>
                   <p className="text-xs text-muted-foreground">
-                    {t(`cat.${p.category}`)} · {formatPrice(p.price)} · {p.quantity} {p.unit}
+                    {t(`cat.${p.category}`)} · {formatPrice(p.price)} · {p.quantity} {unitLabel(t, p.unit)}
                   </p>
                 </div>
                 <Badge
@@ -290,7 +290,7 @@ function StoreProducts() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="sp-unit">{t("common.quantity")} ({t("common.optional")})</Label>
+                <Label htmlFor="sp-unit">{t("common.unit")} ({t("common.optional")})</Label>
                 <Input
                   id="sp-unit"
                   value={draft.unit}
