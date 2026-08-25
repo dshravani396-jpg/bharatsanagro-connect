@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import logo from "@/assets/logo.jpg.asset.json";
+import logo from "@/assets/brand-logo.jpg";
 import heroField from "@/assets/auth-hero.jpg";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
@@ -42,8 +42,10 @@ export function SplashScreen() {
       <div className="absolute inset-0 bg-primary-deep/85" />
       <div className="relative flex animate-in flex-col items-center gap-6 px-6 text-center fade-in duration-1000">
         <img
-          src={logo.url}
+          src={logo}
           alt="Bharatsanagro"
+          width={635}
+          height={491}
           className="h-40 w-40 rounded-3xl bg-card object-contain p-2 shadow-lift sm:h-52 sm:w-52"
         />
         <p
