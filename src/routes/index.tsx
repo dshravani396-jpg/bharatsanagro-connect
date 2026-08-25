@@ -72,14 +72,6 @@ function Home() {
             <Button asChild size="lg" variant="secondary">
               <Link to="/stores">{t("home.findStores")}</Link>
             </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="border-primary-foreground/50 bg-transparent text-primary-foreground hover:bg-primary-foreground/10"
-            >
-              <Link to="/auth">{t("auth.guestTitle")}</Link>
-            </Button>
           </div>
         </div>
       </section>

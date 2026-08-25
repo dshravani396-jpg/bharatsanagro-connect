@@ -32,9 +32,6 @@ export function RequireRole({ role, children }: { role: Role; children: ReactNod
             <Button asChild>
               <Link to="/auth">{t("nav.login")}</Link>
             </Button>
-            <Button asChild variant="outline">
-              <Link to="/products">{t("guest.continueBrowsing")}</Link>
-            </Button>
           </div>
         </div>
       </PageShell>

@@ -62,7 +62,9 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur">
       <div className="container-page grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 py-3">
-        <BrandLogo to={role === "store" ? "/store/dashboard" : role === "farmer" ? "/dashboard" : "/"} />
+        <BrandLogo
+          to={role === "store" ? "/store/dashboard" : role === "farmer" ? "/dashboard" : "/"}
+        />
 
         <div className="flex items-center gap-1 sm:gap-2">
           <nav className="hidden items-center gap-1 lg:flex">
@@ -121,11 +123,6 @@ export function SiteHeader() {
               <Button asChild variant="outline" size="sm">
                 <Link to="/auth">{t("nav.login")}</Link>
               </Button>
-              <Button asChild size="sm">
-                <Link to="/auth" search={{ tab: "register" }}>
-                  {t("nav.createAccount")}
-                </Link>
-              </Button>
             </div>
           )}
 
@@ -156,16 +153,9 @@ export function SiteHeader() {
                       {t("nav.logout")}
                     </Button>
                   ) : (
-                    <>
-                      <Button asChild variant="outline" onClick={() => setOpen(false)}>
-                        <Link to="/auth">{t("nav.login")}</Link>
-                      </Button>
-                      <Button asChild onClick={() => setOpen(false)}>
-                        <Link to="/auth" search={{ tab: "register" }}>
-                          {t("nav.createAccount")}
-                        </Link>
-                      </Button>
-                    </>
+                    <Button asChild variant="outline" onClick={() => setOpen(false)}>
+                      <Link to="/auth">{t("nav.login")}</Link>
+                    </Button>
                   )}
                 </div>
               </div>
