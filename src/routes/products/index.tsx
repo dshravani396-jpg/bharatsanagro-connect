@@ -17,10 +17,13 @@ import { useProducts, type ProductWithStore } from "@/lib/data";
 import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/products/")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    category: typeof search.category === "string" ? search.category : undefined,
-    store: typeof search.store === "string" ? search.store : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>) => {
+    const out: { category?: string; store?: string } = {};
+    if (typeof search["category"] === "string") out.category = search["category"];
+    if (typeof search["store"] === "string") out.store = search["store"];
+    return out;
+  },
+
   head: () => ({
     meta: [
       { title: "Agricultural Products — Bharatsanagro" },
