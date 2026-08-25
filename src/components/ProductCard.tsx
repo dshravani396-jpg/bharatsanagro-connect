@@ -4,7 +4,7 @@ import { MapPin, Star, Store as StoreIcon } from "lucide-react";
 import productPlaceholder from "@/assets/product-placeholder.jpg";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { formatPrice } from "@/lib/catalog";
+import { formatPrice, unitLabel } from "@/lib/catalog";
 import type { ProductWithStore } from "@/lib/data";
 import { useI18n } from "@/lib/i18n";
 
@@ -53,7 +53,7 @@ export function ProductCard({
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <span className="text-lg font-semibold text-primary">{formatPrice(product.price)}</span>
           <span className="text-xs text-muted-foreground">
-            {t("products.availableQty")}: {product.quantity} {product.unit}
+            {t("products.availableQty")}: {product.quantity} {unitLabel(t, product.unit)}
           </span>
         </div>
 
