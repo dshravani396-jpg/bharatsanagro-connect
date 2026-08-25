@@ -13,7 +13,6 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BookingsRouteImport } from './routes/bookings'
-import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as PrivacyRouteImport } from './routes/privacy'
@@ -46,11 +45,6 @@ const AuthRoute = AuthRouteImport.update({
 const BookingsRoute = BookingsRouteImport.update({
   id: '/bookings',
   path: '/bookings',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -124,7 +118,6 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
   '/bookings': typeof BookingsRoute
-  '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/how-it-works': typeof HowItWorksRoute
   '/privacy': typeof PrivacyRoute
@@ -144,7 +137,6 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
   '/bookings': typeof BookingsRoute
-  '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/how-it-works': typeof HowItWorksRoute
   '/privacy': typeof PrivacyRoute
@@ -165,7 +157,6 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
   '/bookings': typeof BookingsRoute
-  '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/how-it-works': typeof HowItWorksRoute
   '/privacy': typeof PrivacyRoute
@@ -187,7 +178,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/auth'
     | '/bookings'
-    | '/contact'
     | '/dashboard'
     | '/how-it-works'
     | '/privacy'
@@ -207,7 +197,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/auth'
     | '/bookings'
-    | '/contact'
     | '/dashboard'
     | '/how-it-works'
     | '/privacy'
@@ -227,7 +216,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/auth'
     | '/bookings'
-    | '/contact'
     | '/dashboard'
     | '/how-it-works'
     | '/privacy'
@@ -248,7 +236,6 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AuthRoute: typeof AuthRoute
   BookingsRoute: typeof BookingsRoute
-  ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRoute
   HowItWorksRoute: typeof HowItWorksRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -292,13 +279,6 @@ declare module '@tanstack/react-router' {
       path: '/bookings'
       fullPath: '/bookings'
       preLoaderRoute: typeof BookingsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -400,7 +380,6 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AuthRoute: AuthRoute,
   BookingsRoute: BookingsRoute,
-  ContactRoute: ContactRoute,
   DashboardRoute: DashboardRoute,
   HowItWorksRoute: HowItWorksRoute,
   PrivacyRoute: PrivacyRoute,
