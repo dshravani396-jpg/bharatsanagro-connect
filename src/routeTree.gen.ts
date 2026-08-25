@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as ProductsIndexRouteImport } from './routes/products/index'
 import { Route as ProductsProductIdRouteImport } from './routes/products/$productId'
 import { Route as StoresIndexRouteImport } from './routes/stores/index'
@@ -24,6 +25,11 @@ const IndexRoute = IndexRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowItWorksRoute = HowItWorksRouteImport.update({
+  id: '/how-it-works',
+  path: '/how-it-works',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProductsIndexRoute = ProductsIndexRouteImport.update({
@@ -50,6 +56,7 @@ const StoresStoreIdRoute = StoresStoreIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/how-it-works': typeof HowItWorksRoute
   '/products/$productId': typeof ProductsProductIdRoute
   '/stores/$storeId': typeof StoresStoreIdRoute
   '/products/': typeof ProductsIndexRoute
@@ -58,6 +65,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/how-it-works': typeof HowItWorksRoute
   '/products/$productId': typeof ProductsProductIdRoute
   '/stores/$storeId': typeof StoresStoreIdRoute
   '/products': typeof ProductsIndexRoute
@@ -67,6 +75,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/how-it-works': typeof HowItWorksRoute
   '/products/$productId': typeof ProductsProductIdRoute
   '/stores/$storeId': typeof StoresStoreIdRoute
   '/products/': typeof ProductsIndexRoute
@@ -77,6 +86,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/how-it-works'
     | '/products/$productId'
     | '/stores/$storeId'
     | '/products/'
@@ -85,6 +95,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/how-it-works'
     | '/products/$productId'
     | '/stores/$storeId'
     | '/products'
@@ -93,6 +104,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/auth'
+    | '/how-it-works'
     | '/products/$productId'
     | '/stores/$storeId'
     | '/products/'
@@ -102,6 +114,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
+  HowItWorksRoute: typeof HowItWorksRoute
   ProductsProductIdRoute: typeof ProductsProductIdRoute
   StoresStoreIdRoute: typeof StoresStoreIdRoute
   ProductsIndexRoute: typeof ProductsIndexRoute
@@ -122,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-it-works': {
+      id: '/how-it-works'
+      path: '/how-it-works'
+      fullPath: '/how-it-works'
+      preLoaderRoute: typeof HowItWorksRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/products/': {
@@ -158,6 +178,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
+  HowItWorksRoute: HowItWorksRoute,
   ProductsProductIdRoute: ProductsProductIdRoute,
   StoresStoreIdRoute: StoresStoreIdRoute,
   ProductsIndexRoute: ProductsIndexRoute,
