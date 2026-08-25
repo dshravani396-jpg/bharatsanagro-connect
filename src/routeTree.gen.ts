@@ -17,6 +17,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ProductsIndexRouteImport } from './routes/products/index'
 import { Route as ProductsProductIdRouteImport } from './routes/products/$productId'
@@ -63,6 +64,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -98,6 +104,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/how-it-works': typeof HowItWorksRoute
   '/privacy': typeof PrivacyRoute
+  '/profile': typeof ProfileRoute
   '/terms': typeof TermsRoute
   '/products/$productId': typeof ProductsProductIdRoute
   '/stores/$storeId': typeof StoresStoreIdRoute
@@ -113,6 +120,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/how-it-works': typeof HowItWorksRoute
   '/privacy': typeof PrivacyRoute
+  '/profile': typeof ProfileRoute
   '/terms': typeof TermsRoute
   '/products/$productId': typeof ProductsProductIdRoute
   '/stores/$storeId': typeof StoresStoreIdRoute
@@ -129,6 +137,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/how-it-works': typeof HowItWorksRoute
   '/privacy': typeof PrivacyRoute
+  '/profile': typeof ProfileRoute
   '/terms': typeof TermsRoute
   '/products/$productId': typeof ProductsProductIdRoute
   '/stores/$storeId': typeof StoresStoreIdRoute
@@ -146,6 +155,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/how-it-works'
     | '/privacy'
+    | '/profile'
     | '/terms'
     | '/products/$productId'
     | '/stores/$storeId'
@@ -161,6 +171,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/how-it-works'
     | '/privacy'
+    | '/profile'
     | '/terms'
     | '/products/$productId'
     | '/stores/$storeId'
@@ -176,6 +187,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/how-it-works'
     | '/privacy'
+    | '/profile'
     | '/terms'
     | '/products/$productId'
     | '/stores/$storeId'
@@ -192,6 +204,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   HowItWorksRoute: typeof HowItWorksRoute
   PrivacyRoute: typeof PrivacyRoute
+  ProfileRoute: typeof ProfileRoute
   TermsRoute: typeof TermsRoute
   ProductsProductIdRoute: typeof ProductsProductIdRoute
   StoresStoreIdRoute: typeof StoresStoreIdRoute
@@ -257,6 +270,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/terms': {
       id: '/terms'
       path: '/terms'
@@ -304,6 +324,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   HowItWorksRoute: HowItWorksRoute,
   PrivacyRoute: PrivacyRoute,
+  ProfileRoute: ProfileRoute,
   TermsRoute: TermsRoute,
   ProductsProductIdRoute: ProductsProductIdRoute,
   StoresStoreIdRoute: StoresStoreIdRoute,
