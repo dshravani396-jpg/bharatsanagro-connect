@@ -55,6 +55,17 @@ export function isValidMobile(mobile: string) {
   return /^[6-9]\d{9}$/.test(mobile.replace(/\D/g, ""));
 }
 
+/**
+ * Aadhaar numbers are 12 digits and never begin with 0 or 1.
+ *
+ * This is a format check only. It does not prove the number is real or
+ * belongs to the person entering it - genuine Aadhaar verification can only
+ * be done through UIDAI by an authorised agency.
+ */
+export function isValidAadhaar(aadhaar: string) {
+  return /^[2-9]\d{11}$/.test(aadhaar.replace(/\D/g, ""));
+}
+
 type AuthValue = {
   loading: boolean;
   session: Session | null;
