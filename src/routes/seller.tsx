@@ -234,7 +234,22 @@ function SellerAuthPage() {
                 <Button type="submit" className="w-full" disabled={busy}>
                   {busy ? t("common.loading") : t("auth.login")}
                 </Button>
-                <p className="text-xs text-muted-foreground">{t("auth.forgotHelp")}</p>
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <button
+                    type="button"
+                    onClick={() => toast.info(t("auth.forgotHelp"))}
+                    className="text-sm font-medium text-primary underline-offset-4 hover:underline"
+                  >
+                    {t("auth.forgotPassword")}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setMode("register")}
+                    className="text-sm font-medium text-primary underline-offset-4 hover:underline"
+                  >
+                    Create Store Account
+                  </button>
+                </div>
               </form>
             </TabsContent>
 

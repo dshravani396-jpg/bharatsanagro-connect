@@ -27,6 +27,7 @@ const GUEST_NAV: NavItem[] = [
   { to: "/how-it-works", labelKey: "nav.howItWorks" },
   { to: "/about", labelKey: "nav.about" },
   { to: "/contact", labelKey: "nav.contact" },
+  { to: "/seller", labelKey: "nav.seller" },
 ];
 
 const FARMER_NAV: NavItem[] = [
