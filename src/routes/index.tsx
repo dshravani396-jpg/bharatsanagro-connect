@@ -156,6 +156,8 @@ function Home() {
         <ReviewsSection />
       </section>
 
+      <ContactSection />
+
       <BookingDialog product={booking} onOpenChange={(o) => !o && setBooking(null)} />
     </PageShell>
   );
