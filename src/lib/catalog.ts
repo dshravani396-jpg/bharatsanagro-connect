@@ -56,7 +56,7 @@ export const STATES = [
 ];
 
 export function formatPrice(value: number) {
-  return ₹${ Number(value).toLocaleString("en-IN", { maximumFractionDigits: 2 }) };
+  return `₹${Number(value).toLocaleString("en-IN", { maximumFractionDigits: 2 })}`;
 }
 
 export function formatDate(value?: string | null) {
