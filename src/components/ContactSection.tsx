@@ -97,7 +97,7 @@ export function ContactSection() {
                   id="contact-details"
                   value={details}
                   onChange={(e) => setDetails(e.target.value)}
-                  placeholder="Tell us what you need"
+                  placeholder="Add Your Product Details..."
                   rows={4}
                   required
                 />
