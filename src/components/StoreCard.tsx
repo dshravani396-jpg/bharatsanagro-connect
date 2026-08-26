@@ -5,6 +5,7 @@ import storePlaceholder from "@/assets/store-placeholder.jpg";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { Store } from "@/lib/auth";
+import { translatedContent } from "@/lib/catalog";
 import { useI18n } from "@/lib/i18n";
 
 export function StoreCard({
@@ -23,7 +24,7 @@ export function StoreCard({
       <Link to="/stores/$storeId" params={{ storeId: store.id }}>
         <img
           src={store.image_url || storePlaceholder}
-          alt={store.store_name}
+          alt={translatedContent(t, "storename", store.store_name)}
           loading="lazy"
           width={1200}
           height={800}
@@ -33,7 +34,7 @@ export function StoreCard({
       <div className="flex flex-1 flex-col gap-3 p-4">
         <div className="flex items-start justify-between gap-2">
           <h3 className="min-w-0 truncate text-base font-semibold text-primary-deep">
-            {store.store_name}
+            {translatedContent(t, "storename", store.store_name)}
           </h3>
           <Badge
             variant="outline"
@@ -55,12 +56,12 @@ export function StoreCard({
           <p className="flex items-start gap-1.5">
             <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0" />
             <span className="line-clamp-2">
-              {store.address}, {store.district}, {store.state} {store.pincode}
+              {translatedContent(t, "address", store.address)}, {translatedContent(t, "district", store.district)}, {translatedContent(t, "state", store.state)} {store.pincode}
             </span>
           </p>
           <p className="flex items-center gap-1.5">
             <Clock className="h-3.5 w-3.5 shrink-0" />
-            {store.opening_hours}
+            {translatedContent(t, "hours", store.opening_hours)}
           </p>
           <p className="flex items-center gap-1.5">
             <Package className="h-3.5 w-3.5 shrink-0" />

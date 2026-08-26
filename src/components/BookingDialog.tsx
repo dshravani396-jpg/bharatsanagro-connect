@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
-import { formatPrice } from "@/lib/catalog";
+import { formatPrice, translatedContent } from "@/lib/catalog";
 import type { ProductWithStore } from "@/lib/data";
 import { useI18n } from "@/lib/i18n";
 
@@ -81,9 +81,12 @@ export function BookingDialog({
             </DialogHeader>
             <div className="space-y-4">
               <div className="rounded-xl bg-muted/60 p-3 text-sm">
-                <p className="font-medium">{product?.stores?.store_name}</p>
+                <p className="font-medium">
+                  {translatedContent(t, "storename", product?.stores?.store_name)}
+                </p>
                 <p className="text-muted-foreground">
-                  {product?.stores?.address}, {product?.stores?.district}
+                  {translatedContent(t, "address", product?.stores?.address)},{" "}
+                  {translatedContent(t, "district", product?.stores?.district)}
                 </p>
               </div>
               <div className="space-y-2">
@@ -124,14 +127,8 @@ export function BookingDialog({
             </DialogHeader>
             <div className="flex flex-col gap-2">
               <Button onClick={() => navigate({ to: "/auth" })}>{t("nav.login")}</Button>
-              <Button
-                variant="outline"
-                onClick={() => navigate({ to: "/auth", search: { tab: "register" } })}
-              >
-                {t("auth.createFarmer")}
-              </Button>
               <Button variant="ghost" onClick={() => onOpenChange(false)}>
-                {t("guest.continueBrowsing")}
+                {t("common.cancel")}
               </Button>
             </div>
           </>

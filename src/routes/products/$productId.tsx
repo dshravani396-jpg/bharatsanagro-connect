@@ -7,7 +7,7 @@ import { BookingDialog } from "@/components/BookingDialog";
 import { PageShell } from "@/components/PageShell";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { formatDate, formatPrice } from "@/lib/catalog";
+import { formatDate, formatPrice, translatedContent } from "@/lib/catalog";
 import { useProduct, type ProductWithStore } from "@/lib/data";
 import { useI18n } from "@/lib/i18n";
 
@@ -98,7 +98,7 @@ function ProductDetail() {
                 </Badge>
               </div>
               <h1 className="mt-3 text-2xl font-semibold text-primary-deep sm:text-3xl">
-                {product.name}
+                {translatedContent(t, "prod", product.name)}
               </h1>
               <p className="mt-1 text-sm text-muted-foreground">
                 {t("common.brand")}: {product.brand || "—"}
@@ -144,10 +144,10 @@ function ProductDetail() {
               <h2 className="text-base font-semibold text-primary-deep">
                 {t("products.storeInfo")}
               </h2>
-              <p className="mt-2 text-sm font-medium">{product.stores?.store_name}</p>
+              <p className="mt-2 text-sm font-medium">{translatedContent(t, "storename", product.stores?.store_name)}</p>
               <p className="mt-1 flex items-start gap-1.5 text-sm text-muted-foreground">
                 <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0" />
-                {product.stores?.address}, {product.stores?.district}, {product.stores?.state}{" "}
+                {translatedContent(t, "address", product.stores?.address)}, {translatedContent(t, "district", product.stores?.district)}, {translatedContent(t, "state", product.stores?.state)}{" "}
                 {product.stores?.pincode}
               </p>
               {product.stores ? (

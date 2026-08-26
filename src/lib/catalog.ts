@@ -68,22 +68,6 @@ export function formatDate(value?: string | null) {
   });
 }
 
-/**
- * Translate a product unit ("kg", "bag", ...) using the active language.
- *
- * t() returns the key itself when a translation is missing, never undefined,
- * so compare the result against the key to detect that case. Units are typed
- * freely by store owners, so unknown values are expected: fall back to what
- * they typed rather than printing a raw key like "unit.quintal" on screen.
- */
-export function unitLabel(t: (key: string) => string, unit?: string | null) {
-  if (!unit) return "";
-  const key = unit.${ unit.trim().toLowerCase()
-};
-const label = t(key);
-return label === key ? unit : label;
-}
-
 export function generateOtp() {
   return String(Math.floor(100000 + Math.random() * 900000));
 }

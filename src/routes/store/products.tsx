@@ -28,7 +28,7 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
-import { CATEGORIES, formatPrice } from "@/lib/catalog";
+import { CATEGORIES, formatPrice, translatedContent, unitLabel } from "@/lib/catalog";
 import { useStoreProducts, type Product } from "@/lib/data";
 import { useI18n } from "@/lib/i18n";
 
@@ -168,7 +168,7 @@ function StoreProducts() {
       <div className="container-page space-y-6 py-10">
         <PageHeading
           title={t("store.myProducts")}
-          subtitle={store?.store_name ?? ""}
+          subtitle={translatedContent(t, "storename", store?.store_name)}
           action={
             <Button onClick={() => setDraft({ ...EMPTY })}>
               <Plus className="mr-2 h-4 w-4" />
@@ -186,7 +186,7 @@ function StoreProducts() {
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-semibold text-primary-deep">{p.name}</p>
                   <p className="text-xs text-muted-foreground">
-                    {t(`cat.${p.category}`)} · {formatPrice(p.price)} · {p.quantity} {p.unit}
+                    {t(`cat.${p.category}`)} · {formatPrice(p.price)} · {p.quantity} {unitLabel(t, p.unit)}
                   </p>
                 </div>
                 <Badge
@@ -290,7 +290,7 @@ function StoreProducts() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="sp-unit">{t("common.quantity")} ({t("common.optional")})</Label>
+                <Label htmlFor="sp-unit">{t("common.unit")} ({t("common.optional")})</Label>
                 <Input
                   id="sp-unit"
                   value={draft.unit}
