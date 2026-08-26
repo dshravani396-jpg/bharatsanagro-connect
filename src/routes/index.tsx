@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import heroImage from "@/assets/auth-hero.jpg";
 import { BookingDialog } from "@/components/BookingDialog";
+import { ContactSection } from "@/components/ContactSection";
 import { PageShell } from "@/components/PageShell";
 import { ProductCard } from "@/components/ProductCard";
 import { ReviewsSection } from "@/components/ReviewsSection";
@@ -154,6 +155,8 @@ function Home() {
         </div>
         <ReviewsSection />
       </section>
+
+      <ContactSection />
 
       <BookingDialog product={booking} onOpenChange={(o) => !o && setBooking(null)} />
     </PageShell>
