@@ -56,7 +56,7 @@ export const STATES = [
 ];
 
 export function formatPrice(value: number) {
-  return ₹${ Number(value).toLocaleString("en-IN", { maximumFractionDigits: 2 }) };
+  return `₹${Number(value).toLocaleString("en-IN", { maximumFractionDigits: 2 })}`;
 }
 
 export function formatDate(value?: string | null) {
@@ -70,4 +70,36 @@ export function formatDate(value?: string | null) {
 
 export function generateOtp() {
   return String(Math.floor(100000 + Math.random() * 900000));
+}
+
+type Translate = (key: string, vars?: Record<string, string | number>) => string;
+
+function slugifyKey(value: string) {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+}
+
+/**
+ * Looks up a translation for dynamic database content (store names, addresses,
+ * product names…) and falls back to the raw value when no translation exists.
+ */
+export function translatedContent(
+  t: Translate,
+  prefix: string,
+  value?: string | null,
+): string {
+  if (!value) return "";
+  const key = `${prefix}.${slugifyKey(value)}`;
+  const translated = t(key);
+  return translated === key ? value : translated;
+}
+
+export function unitLabel(t: Translate, unit?: string | null): string {
+  if (!unit) return "";
+  const key = `unit.${unit}`;
+  const translated = t(key);
+  return translated === key ? unit : translated;
 }
