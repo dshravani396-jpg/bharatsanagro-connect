@@ -10,6 +10,10 @@ export const CATEGORIES = [
 
 export type CategoryValue = (typeof CATEGORIES)[number]["value"];
 
+export const UNITS = ["kg", "bag", "roll", "litre", "packet", "unit"] as const;
+
+export type UnitValue = (typeof UNITS)[number];
+
 export const BOOKING_STATUSES = [
   "pending",
   "confirmed",
@@ -52,7 +56,7 @@ export const STATES = [
 ];
 
 export function formatPrice(value: number) {
-  return `₹${Number(value).toLocaleString("en-IN", { maximumFractionDigits: 2 })}`;
+  return ₹${ Number(value).toLocaleString("en-IN", { maximumFractionDigits: 2 }) };
 }
 
 export function formatDate(value?: string | null) {
@@ -62,6 +66,22 @@ export function formatDate(value?: string | null) {
     month: "short",
     year: "numeric",
   });
+}
+
+/**
+ * Translate a product unit ("kg", "bag", ...) using the active language.
+ *
+ * t() returns the key itself when a translation is missing, never undefined,
+ * so compare the result against the key to detect that case. Units are typed
+ * freely by store owners, so unknown values are expected: fall back to what
+ * they typed rather than printing a raw key like "unit.quintal" on screen.
+ */
+export function unitLabel(t: (key: string) => string, unit?: string | null) {
+  if (!unit) return "";
+  const key = unit.${ unit.trim().toLowerCase()
+};
+const label = t(key);
+return label === key ? unit : label;
 }
 
 export function generateOtp() {

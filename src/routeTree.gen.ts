@@ -18,6 +18,7 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as SellerRouteImport } from './routes/seller'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ProductsIndexRouteImport } from './routes/products/index'
 import { Route as ProductsProductIdRouteImport } from './routes/products/$productId'
@@ -71,6 +72,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const ProfileRoute = ProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SellerRoute = SellerRouteImport.update({
+  id: '/seller',
+  path: '/seller',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermsRoute = TermsRouteImport.update({
@@ -129,6 +135,7 @@ export interface FileRoutesByFullPath {
   '/how-it-works': typeof HowItWorksRoute
   '/privacy': typeof PrivacyRoute
   '/profile': typeof ProfileRoute
+  '/seller': typeof SellerRoute
   '/terms': typeof TermsRoute
   '/products/$productId': typeof ProductsProductIdRoute
   '/store/bookings': typeof StoreBookingsRoute
@@ -149,6 +156,7 @@ export interface FileRoutesByTo {
   '/how-it-works': typeof HowItWorksRoute
   '/privacy': typeof PrivacyRoute
   '/profile': typeof ProfileRoute
+  '/seller': typeof SellerRoute
   '/terms': typeof TermsRoute
   '/products/$productId': typeof ProductsProductIdRoute
   '/store/bookings': typeof StoreBookingsRoute
@@ -170,6 +178,7 @@ export interface FileRoutesById {
   '/how-it-works': typeof HowItWorksRoute
   '/privacy': typeof PrivacyRoute
   '/profile': typeof ProfileRoute
+  '/seller': typeof SellerRoute
   '/terms': typeof TermsRoute
   '/products/$productId': typeof ProductsProductIdRoute
   '/store/bookings': typeof StoreBookingsRoute
@@ -192,6 +201,7 @@ export interface FileRouteTypes {
     | '/how-it-works'
     | '/privacy'
     | '/profile'
+    | '/seller'
     | '/terms'
     | '/products/$productId'
     | '/store/bookings'
@@ -212,6 +222,7 @@ export interface FileRouteTypes {
     | '/how-it-works'
     | '/privacy'
     | '/profile'
+    | '/seller'
     | '/terms'
     | '/products/$productId'
     | '/store/bookings'
@@ -232,6 +243,7 @@ export interface FileRouteTypes {
     | '/how-it-works'
     | '/privacy'
     | '/profile'
+    | '/seller'
     | '/terms'
     | '/products/$productId'
     | '/store/bookings'
@@ -253,6 +265,7 @@ export interface RootRouteChildren {
   HowItWorksRoute: typeof HowItWorksRoute
   PrivacyRoute: typeof PrivacyRoute
   ProfileRoute: typeof ProfileRoute
+  SellerRoute: typeof SellerRoute
   TermsRoute: typeof TermsRoute
   ProductsProductIdRoute: typeof ProductsProductIdRoute
   StoreBookingsRoute: typeof StoreBookingsRoute
@@ -327,6 +340,13 @@ declare module '@tanstack/react-router' {
       path: '/profile'
       fullPath: '/profile'
       preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/seller': {
+      id: '/seller'
+      path: '/seller'
+      fullPath: '/seller'
+      preLoaderRoute: typeof SellerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/terms': {
@@ -405,6 +425,7 @@ const rootRouteChildren: RootRouteChildren = {
   HowItWorksRoute: HowItWorksRoute,
   PrivacyRoute: PrivacyRoute,
   ProfileRoute: ProfileRoute,
+  SellerRoute: SellerRoute,
   TermsRoute: TermsRoute,
   ProductsProductIdRoute: ProductsProductIdRoute,
   StoreBookingsRoute: StoreBookingsRoute,
@@ -418,13 +439,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
