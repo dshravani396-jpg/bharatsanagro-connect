@@ -27,7 +27,7 @@ export function ContactSection() {
         <div className="surface-card p-6">
           <h3 className="text-base font-semibold text-primary-deep">Get in touch</h3>
           <p className="mt-2 text-sm text-muted-foreground">
-            Have a product requirement? Share your details and our team will reach out to you.
+            Share your details and our team will reach out to you.
           </p>
           <div className="mt-4 space-y-3">
             <div className="flex items-center gap-3 text-sm">
