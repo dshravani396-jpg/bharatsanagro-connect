@@ -240,10 +240,9 @@ function SellerAuthPage() {
                     onClick={() => toast.info(t("auth.forgotHelp"))}
                     className="text-sm font-medium text-primary underline-offset-4 hover:underline"
                   >
-                    {t("auth.forgotPassword")}
+                    Forgot Password
                   </button>
                   <button
-                    type="button"
                     onClick={() => setMode("register")}
                     className="text-sm font-medium text-primary underline-offset-4 hover:underline"
                   >
